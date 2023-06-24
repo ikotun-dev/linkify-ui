@@ -22,6 +22,12 @@ module.exports = {
         '120' : '40rem',
         '200' : '180rem'
       },
+      width: { 
+        '50' : '13rem',
+        '67' : '19rem',
+        '78' : '25rem',
+        '76' : '22rem',
+      }
     },
   },
   plugins: [],
