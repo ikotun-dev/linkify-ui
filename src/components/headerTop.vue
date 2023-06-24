@@ -14,30 +14,50 @@
       <h4 class="lg:ml-8 font-pop lg:text-xl lg:mt-2 sm:text-md font-bold sm:ml-6 sm:mt-2">convert long urls to tiny urls for easy sharing</h4>
 
       <div class="flex sm:w-67 lg:w-78 border-2 border-green-800 lg:ml-8 lg:mt-2 sm:ml-6 sm:mt-4">
-        <input class="lg:w-76 sm:w-64 focus:outline-none py-2 px-2" type="text"/>
-        <div class="pt-2 pl-4 bg-green-800 w-12 text-xl font-bold hover:text-white">
+        <input v-model="long_url" class="lg:w-76 sm:w-64 focus:outline-none py-2 px-2 font-pop" placeholder="url" type="text"/>
+        <div @click="shorten_url" class="pt-2 pl-4 bg-green-800 w-12 text-xl font-bold text-white hover:text-white">
          &rightarrow;
         </div>
       </div>
 
-      <div class="flex sm:w-67 lg:w-78 border-2 border-green-800 lg:ml-8 lg:mt-2 sm:ml-6 sm:mt-4">
+      <div v-show="short_url" class="flex sm:w-67 lg:w-78 border-2 border-green-800 lg:ml-8 lg:mt-2 sm:ml-6 sm:mt-4">
         <input class="lg:w-76 sm:w-64 focus:outline-none py-2 px-2" type="text"/>
-        <div class="pt-2 pl-4 bg-green-800 w-12 text-xl font-bold hover:text-white">
-        <i class="fa fas-files-o"></i>
+        <div class="pt-2 pl-4 bg-green-800 w-12 text-xl text-white font-bold hover:text-white">
+        <i class="fas fa-copy"></i>
         </div>
       </div>
     </div>
+  
 
  
   </div> 
 
-  <div  class="absolute bottom-0 h-16 w-full bg-green-950">
-sl
+  <div  class="absolute bottom-0 h-16 w-full pt-4 bg-green-950 flex justify-center">
+     <h2 class="text-white font-pop">&copy; Linkify 2023. Made by <a href="https://www.github.com/ikotun.dev " class="text-green-200">Collins</a></h2>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default{
+  data() { 
+    return {
+      short_url : false,
+      long_url : "",
+    };
+  },
+  methods : {
+    async shorten_url(){
+        const res = await axios.post('http://127.0.0.1:8000/api/shortenurl/', { 
+          'url' : this.long_url
+        });
+
+        if (res.status == 200){
+          console.log("login was successful");
+          console.log(res.data.short_url)
+        }
+    },
+  },
 
 }
 </script>
