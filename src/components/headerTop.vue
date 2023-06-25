@@ -49,7 +49,7 @@ export default{
   },
   methods : {
     async shorten_url(){
-        const res = await axios.post('http://127.0.0.1:8000/api/shortenurl/', { 
+        const res = await axios.post('http://127.0.0.1:8000/shorten', { 
           'url' : this.long_url
         });
 
